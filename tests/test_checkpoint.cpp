@@ -19,6 +19,8 @@ TEST(TLBTest, TestsIntests)
     int err = checkpoint(5, "txe21");
     ASSERT_EQ(err, 0);
 
+    sleep(1);
+
     int fd = open("journal.txt", O_RDONLY);
     int fd2 = open("data.txt", O_RDONLY);
 
