@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 
 TEST(TLBTest, TestsIntests)
 {
-    write_to_journal(5, "txb43", 2, "IB", 2, "BB", 11, "checkpoint 1,2,3", 6, "TXE150");
+    write_to_journal(5, "txb43", 2, "IB", 2, "BB", 16, "checkpoint 1,2,3", 6, "TXE150");
 
     int fd = open("journal.txt", O_RDONLY);
     char* sol = "txb43IBBBcheckpoint 1,2,3TXE150";
