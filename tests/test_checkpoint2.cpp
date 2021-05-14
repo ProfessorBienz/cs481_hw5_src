@@ -26,7 +26,7 @@ TEST(TLBTest, TestsIntests)
 
     sleep(1);
 
-    char* sol = "txb43IBBBcheckpoing 1,2,3TXE150";
+    char* sol = "txb43IBBBcheckpoint 1,2,3TXE150";
 
     int fd = open("journal.txt", O_RDONLY);
     int fd2 = open("data.txt", O_RDONLY);
