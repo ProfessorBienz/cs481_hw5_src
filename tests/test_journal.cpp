@@ -17,4 +17,16 @@ int main(int argc, char** argv)
 TEST(TLBTest, TestsIntests)
 {
     write_to_journal(5, "txe12", 2, "ib", 2, "bb", 11, "hello world", 5, "txe21");
+
+    int fd = open("journal.txt", O_RDONLY);
+    char* sol = "txe12ibbbhello worldtxe21";
+
+    struct stat st;
+    stat("journal.txt", &st);
+    int size = st.st_size;
+    char* file_bytes = (char*)malloc(size*sizeof(char));
+    read(fd, file_bytes, size);
+
+    ASSERT_STREQ(file_bytes, sol);
+    
 }
