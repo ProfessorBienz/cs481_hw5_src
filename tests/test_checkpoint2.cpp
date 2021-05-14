@@ -17,16 +17,16 @@ int main(int argc, char** argv)
 TEST(TLBTest, TestsIntests)
 {
     remove("journal.txt");
-    write_to_journal(5, "txe12", 2, "ib", 2, "bb", 11, "hello world", 5, "txe21");
+    write_to_journal(5, "txb43", 2, "IB", 2, "BB", 16, "checkpoint 1,2,3", 6, "TXE150");
 
     sleep(1);
-
-    int err = checkpoint(5, "txe21");
+    
+    int err = checkpoint(6, "TXE150");
     ASSERT_EQ(err, 0);
 
     sleep(1);
 
-    char* sol = "txe12ibbbhello worldtxe21";
+    char* sol = "txb43IBBBcheckpoing 1,2,3TXE150";
 
     int fd = open("journal.txt", O_RDONLY);
     int fd2 = open("data.txt", O_RDONLY);
@@ -40,8 +40,8 @@ TEST(TLBTest, TestsIntests)
     char* data_bytes = (char*)malloc(size);
     read(fd, journal_bytes, size);
     read(fd2, data_bytes, size);
-    ASSERT_STREQ(data_bytes, journal_bytes);
-    ASSERT_STREQ(sol, data_bytes);
+    ASSERT_STREQ(journal_bytes, data_bytes);
+    ASSERT_STREQ(sol, journal_bytes);
 
     free(journal_bytes);
     free(data_bytes);
